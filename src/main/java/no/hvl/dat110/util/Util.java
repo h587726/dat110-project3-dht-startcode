@@ -42,11 +42,21 @@ public class Util {
 		// The interval (6, 2) using the notation above means; pred = 6 and node = 2
 		// if id = 4, then (6 < 4 <= 2) = false  
 		// if id = 9, then (6 < 9 <= 2) = true
+		BigInteger tempnode = upper;
+
+		if(lower.compareTo(upper) > 0){
+
+			tempnode = upper.add(Hash.addressSize());
+			if(id.compareTo(upper) <= 0){
+				id = id.add(Hash.addressSize());
+			}
+		}
+		upper = tempnode;
 		
 		// Task: given an identifier, id: check whether pred < id <= node
+		boolean cond = lower.compareTo(id) <= 0 && id.compareTo(upper) <= 0;
 		
-		return false;
-
+		return cond;
 	}
 	
 	public static List<String> toString(List<NodeInterface> list) throws RemoteException {
