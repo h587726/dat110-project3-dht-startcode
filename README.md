@@ -207,3 +207,8 @@ If you, for some reasons, need to hand in again, then *X* will have to be a new 
 
 3. The group must provide **read access** to their solution repository to the lab-assistent. The usernames of the lab-assistants are available via Canvas.
 ![](assets/github-actions.png)
+
+TESTS:
+
+![image](https://github.com/h587726/dat110-project3-dht-startcode/assets/54097862/5e2ae73c-3004-4f3f-93b7-6b1c4831bcb1)
+
