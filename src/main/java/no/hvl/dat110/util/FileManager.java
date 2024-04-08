@@ -18,6 +18,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import no.hvl.dat110.chordoperations.ChordLookup;
+import no.hvl.dat110.chordoperations.ChordProtocols;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -82,23 +84,34 @@ public class FileManager {
     	
     	int counter = 0;
 	
-    	// Task1: Given a filename, make replicas and distribute them to all active peers such that: pred < replica <= peer
+    	// Task1: Given a filename, make replicas and distribute
+		// them to all active peers such that: pred < replica <= peer
     	
     	// Task2: assign a replica as the primary for this file. Hint, see the slide (project 3) on Canvas
     	
     	// create replicas of the filename
+		createReplicaFiles();
+
+		int primary = new Random().nextInt(Util.numReplicas - 1);
     	
 		// iterate over the replicas
-    	
-    	// for each replica, find its successor (peer/node) by performing findSuccessor(replica)
-    	
-    	// call the addKey on the successor and add the replica
-		
-		// implement a logic to decide if this successor should be assigned as the primary for the file
-    	
-    	// call the saveFileContent() on the successor and set isPrimary=true if logic above is true otherwise set isPrimary=false
-    	
-    	// increment counter
+		for (int i = 0; i < replicafiles.length; i++) {
+
+			// for each replica, find its successor (peer/node) by performing findSuccessor(replica)
+			NodeInterface findSucc = chordnode.findSuccessor(replicafiles[i]);
+
+			// call the addKey on the successor and add the replica
+			findSucc.addKey(replicafiles[i]);
+
+			// implement a logic to decide if this successor should be assigned as the primary for the file
+			// call the saveFileContent() on the successor and set isPrimary=true
+			// if logic above is true otherwise set isPrimary=false
+			findSucc.saveFileContent(filename, replicafiles[i], bytesOfFile, counter==primary);
+
+			// increment counter
+			counter++;
+		}
+
 		return counter;
     }
 	
