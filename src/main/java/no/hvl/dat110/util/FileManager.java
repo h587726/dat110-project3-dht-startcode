@@ -164,7 +164,7 @@ public class FileManager {
 			// class to check if it is the primary or not
 			if(m.isPrimaryServer()){
 
-				// return the primary when found (i.e., use Util.getProcessStub to get the stub and return it)
+				// return the primary when found (i.e., use Util.getProcessStub to get the stub and return it).
 				return Util.getProcessStub(m.getNodeName(), m.getPort());
 			}
 		}
